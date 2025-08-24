@@ -1,0 +1,59 @@
+@startuml C2 Container Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+scale max 2000 height
+
+Boundary(bookingService, "Бронирование"){
+    Container(booking, "Сервис бронирования", "ASP.NET.Core", "Бронирование отелей и управление бронью")
+    ContainerDb(booking_db, "БД бронирования", "Postgres", "БД сервиса бронирования")
+}
+
+Boundary(usersService, "Пользователи"){
+    Container(users, "Сервис пользователей", , "Управление пользователями")
+    ContainerDb(users_db, "БД пользователей", "Postgres", "БД сервиса пользователей")
+}
+
+Boundary(hotelsService, "Отели"){
+    Container(hotels, "Сервис отелей", , "Список отелей, добавление новых, управление существующими")
+    ContainerDb(hotels_db, "БД отелей", "Postgres", "БД сервиса отелей")
+}
+
+Boundary(reviewsService, "Отзывы"){
+    Container(reviews, "Сервис отзывов", , "Добавление отзывов, а также их модерация")
+    ContainerDb(reviews_db, "БД отзывов", "Postgres", "БД отзывов")
+}
+
+Boundary(paymentsService, "Платежи"){
+    Container(payments, "Сервис платежей", , "Обработка платежей и вычисление финальной стоимости")
+    ContainerDb(payments_db, "БД платежей", "Postgres", "БД платежей")
+}
+
+Container(api_gateway, "API Gateway")
+   
+ContainerQueue(messageBus, "Брокер сообщений", "Kafka")
+
+Rel(booking, booking_db, "Чтение/запись", "SQL")
+Rel(users, users_db, "Чтение/запись", "SQL")
+Rel(hotels, hotels_db, "Чтение/запись", "SQL")
+Rel(reviews, reviews_db, "Чтение/запись", "SQL")
+Rel(payments, payments_db, "Чтение/запись", "SQL")
+
+Rel_D(api_gateway, bookingService, "Отправляет запросы", "gRPC")
+Rel_D(api_gateway, usersService, "Отправляет запросы", "gRPC")
+Rel_D(api_gateway, hotelsService, "Отправляет запросы", "gRPC")
+Rel_D(api_gateway, reviewsService, "Отправляет запросы", "gRPC")
+Rel_D(api_gateway, paymentsService, "Отправляет запросы", "gRPC")
+
+Rel_D(bookingService, messageBus, "События бронирований", "Kafka Protocol")
+Rel_U(messageBus, bookingService, "События оплаты, изменения пользователей, данных об отелях", "Kafka Protocol")
+
+Rel_D(usersService, messageBus, "События добавления и изменения пользователей", "Kafka Protocol")
+
+Rel_D(hotelsService, messageBus, "События добавления и изменения отелей", "Kafka Protocol")
+
+Rel_D(reviewsService, messageBus, "События изменения рейтинга отелей", "Kafka Protocol")
+
+Rel_D(paymentsService, messageBus, "События оплаты")
+Rel_U(messageBus, paymentsService, "События бронирования")
+
+LAYOUT_TOP_DOWN()
+@enduml 
