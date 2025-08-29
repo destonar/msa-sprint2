@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.Booking.Service", "Hotelio.Booking.Service\Hotelio.Booking.Service.csproj", "{2BBFCE70-1A23-4C89-B45A-8BAD52569537}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.ServiceDefaults", "Hotelio.ServiceDefaults\Hotelio.ServiceDefaults.csproj", "{D6BC027B-235C-46D3-9E58-AEFBB811FE31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.Booking.Migrations", "Hotelio.Booking.Migrations\Hotelio.Booking.Migrations.csproj", "{26206C01-6410-426B-A333-DE41AEA0920E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.Booking.AppHost", "Hotelio.Booking.AppHost\Hotelio.Booking.AppHost.csproj", "{79D25B5F-7FAB-425E-9F35-876A385DEF0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BBFCE70-1A23-4C89-B45A-8BAD52569537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BBFCE70-1A23-4C89-B45A-8BAD52569537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BBFCE70-1A23-4C89-B45A-8BAD52569537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BBFCE70-1A23-4C89-B45A-8BAD52569537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6BC027B-235C-46D3-9E58-AEFBB811FE31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6BC027B-235C-46D3-9E58-AEFBB811FE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6BC027B-235C-46D3-9E58-AEFBB811FE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6BC027B-235C-46D3-9E58-AEFBB811FE31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26206C01-6410-426B-A333-DE41AEA0920E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26206C01-6410-426B-A333-DE41AEA0920E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26206C01-6410-426B-A333-DE41AEA0920E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26206C01-6410-426B-A333-DE41AEA0920E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D25B5F-7FAB-425E-9F35-876A385DEF0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D25B5F-7FAB-425E-9F35-876A385DEF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D25B5F-7FAB-425E-9F35-876A385DEF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D25B5F-7FAB-425E-9F35-876A385DEF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
