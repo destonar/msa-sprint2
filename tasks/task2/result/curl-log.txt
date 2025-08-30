@@ -1,0 +1,5 @@
+Результат выполнения curl -sSf "${BASE}/api/bookings?userId=test-user-2" (получить список бронирований test-user-2 через апи монолита из сервиса бронирований):
+[{"id":33,"userId":"test-user-2","hotelId":"test-hotel-1","promoCode":"TESTCODE1","discountPercent":10.0,"price":90.0,"createdAt":"2025-08-30T22:17:07.137120Z"},{"id":36,"userId":"test-user-2","hotelId":"test-hotel-1","promoCode":"TESTCODE1","discountPercent":10.0,"price":90.0,"createdAt":"2025-08-30T22:17:11.461757Z"}]
+
+Результат выполнения curl -sSf "http://localhost:9091/api/bookings?api-version=1.0" (получить список бронирований из сервиса истории):
+[{"bookingId":"35","userId":"test-user-3","hotelId":"test-hotel-1","promoCode":"","discountPercent":0,"price":80,"createdAt":"2025-08-30T22:17:11.260032Z"},{"bookingId":"36","userId":"test-user-2","hotelId":"test-hotel-1","promoCode":"TESTCODE1","discountPercent":10,"price":90,"createdAt":"2025-08-30T22:17:11.461757Z"}]

@@ -93,7 +93,6 @@ public static partial class Extensions
             configureOptions: static caching =>
                 caching.AddPolicy("HealthChecks",
                     build: static policy => policy.Expire(TimeSpan.FromSeconds(10))));
-        
         builder.Services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy(), ["live"]);
 

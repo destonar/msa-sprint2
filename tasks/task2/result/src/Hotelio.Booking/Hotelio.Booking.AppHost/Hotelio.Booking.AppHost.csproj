@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Hotelio.Booking.Service\Hotelio.Booking.Service.csproj" />
+      <ProjectReference Include="..\Hotelio.Booking.Statistics\Hotelio.Booking.Statistics.csproj" />
     </ItemGroup>
 
 </Project>

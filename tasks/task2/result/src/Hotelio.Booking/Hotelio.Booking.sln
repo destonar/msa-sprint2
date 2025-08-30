@@ -8,6 +8,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.Booking.Migrations"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.Booking.AppHost", "Hotelio.Booking.AppHost\Hotelio.Booking.AppHost.csproj", "{79D25B5F-7FAB-425E-9F35-876A385DEF0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.Booking.Statistics", "Hotelio.Booking.Statistics\Hotelio.Booking.Statistics.csproj", "{434D79DA-1494-49AF-A8DB-CF0AF376ECF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BookingService", "BookingService", "{C402F750-E2A2-49FE-83AB-93DE42E701E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BookingStatistics", "BookingStatistics", "{D44DB754-10A5-46A9-A4C5-BE8C04742F92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.Booking.IntegrationEvents", "Hotelio.Booking.IntegrationEvents\Hotelio.Booking.IntegrationEvents.csproj", "{12E62950-6FCD-470C-AA97-62C7FDE8CB95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotelio.Booking.Statistics.Migrations", "Hotelio.Booking.Statistics.Migrations\Hotelio.Booking.Statistics.Migrations.csproj", "{3E3C1A60-C874-4A3B-B054-2BAA18416C66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +40,24 @@ Global
 		{79D25B5F-7FAB-425E-9F35-876A385DEF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79D25B5F-7FAB-425E-9F35-876A385DEF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79D25B5F-7FAB-425E-9F35-876A385DEF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{434D79DA-1494-49AF-A8DB-CF0AF376ECF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{434D79DA-1494-49AF-A8DB-CF0AF376ECF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{434D79DA-1494-49AF-A8DB-CF0AF376ECF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{434D79DA-1494-49AF-A8DB-CF0AF376ECF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E62950-6FCD-470C-AA97-62C7FDE8CB95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E62950-6FCD-470C-AA97-62C7FDE8CB95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E62950-6FCD-470C-AA97-62C7FDE8CB95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E62950-6FCD-470C-AA97-62C7FDE8CB95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3C1A60-C874-4A3B-B054-2BAA18416C66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3C1A60-C874-4A3B-B054-2BAA18416C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3C1A60-C874-4A3B-B054-2BAA18416C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3C1A60-C874-4A3B-B054-2BAA18416C66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{26206C01-6410-426B-A333-DE41AEA0920E} = {C402F750-E2A2-49FE-83AB-93DE42E701E1}
+		{2BBFCE70-1A23-4C89-B45A-8BAD52569537} = {C402F750-E2A2-49FE-83AB-93DE42E701E1}
+		{434D79DA-1494-49AF-A8DB-CF0AF376ECF2} = {D44DB754-10A5-46A9-A4C5-BE8C04742F92}
+		{12E62950-6FCD-470C-AA97-62C7FDE8CB95} = {C402F750-E2A2-49FE-83AB-93DE42E701E1}
+		{3E3C1A60-C874-4A3B-B054-2BAA18416C66} = {D44DB754-10A5-46A9-A4C5-BE8C04742F92}
 	EndGlobalSection
 EndGlobal

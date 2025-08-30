@@ -8,21 +8,21 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Hotelio.ServiceDefaults/Hotelio.ServiceDefaults.csproj", "Hotelio.ServiceDefaults/"]
-COPY ["Hotelio.Booking.Service/Hotelio.Booking.Service.csproj", "Hotelio.Booking.Service/"]
+COPY ["Hotelio.Booking.Statistics/Hotelio.Booking.Statistics.csproj", "Hotelio.Booking.Statistics/"]
 COPY ["Hotelio.Booking.IntegrationEvents/Hotelio.Booking.IntegrationEvents.csproj", "Hotelio.Booking.IntegrationEvents/"]
 
 RUN dotnet restore "Hotelio.Booking.IntegrationEvents/Hotelio.Booking.IntegrationEvents.csproj"
 RUN dotnet restore "Hotelio.ServiceDefaults/Hotelio.ServiceDefaults.csproj"
-RUN dotnet restore "Hotelio.Booking.Service/Hotelio.Booking.Service.csproj"
+RUN dotnet restore "Hotelio.Booking.Statistics/Hotelio.Booking.Statistics.csproj"
 COPY . .
-WORKDIR "/src/Hotelio.Booking.Service"
-RUN dotnet build "./Hotelio.Booking.Service.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Hotelio.Booking.Statistics"
+RUN dotnet build "./Hotelio.Booking.Statistics.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Hotelio.Booking.Service.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Hotelio.Booking.Statistics.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Hotelio.Booking.Service.dll"]
+ENTRYPOINT ["dotnet", "Hotelio.Booking.Statistics.dll"]

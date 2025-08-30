@@ -58,8 +58,6 @@ public static partial class Extensions
             return builder;
         }
         
-        // the default format will just be ApiVersion.ToString(); for example, 1.0.
-        // this will format the version as "'v'major[.minor][-status]"
         apiVersioning.AddApiExplorer(options => options.GroupNameFormat = "'v'VVV");
         builder.Services.AddOpenApi("v1", options =>
         {
@@ -68,8 +66,6 @@ public static partial class Extensions
             options.ApplyOperationDeprecatedStatus();
             options.ApplyApiVersionDescription();
             options.ApplySchemaNullableFalse();
-            // Clear out the default servers so we can fallback to
-            // whatever ports have been allocated for the service by Aspire
             options.AddDocumentTransformer((document, _, _) =>
             {
                 document.Servers = [];

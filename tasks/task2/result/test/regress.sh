@@ -8,7 +8,7 @@ echo "🧪 Проверка подключения к БД монолита..."
 timeout 2 bash -c "</dev/tcp/${DB_HOST}/${DB_PORT}" \
   || { echo "❌ Не удалось подключиться к ${DB_HOST}:${DB_PORT}"; exit 1; }
 
-echo "🧪 Проверка подключения к БД монолита..."
+echo "🧪 Проверка подключения к БД бронирования..."
 timeout 2 bash -c "</dev/tcp/${BOOKING_DB_HOST}/${BOOKING_DB_PORT}" \
   || { echo "❌ Не удалось подключиться к ${BOOKING_DB_HOST}:${BOOKING_DB_PORT}"; exit 1; }
 
@@ -136,4 +136,14 @@ curl -s -o /dev/null -w "%{http_code}" -X POST "${BASE}/api/bookings?userId=test
 curl -s -o /dev/null -w "%{http_code}" -X POST "${BASE}/api/bookings?userId=test-user-2&hotelId=test-hotel-2" | grep -q '500' \
   && pass "Отклонено: отель полностью забронирован" \
   || fail "Ошибка: сервер принял бронирование в полностью занятом отеле"
+  
+echo ""
+echo "Тест сервиса статистики..."
+
+# 1. Получение всех бронирований
+curl -sSf "${STATISTICS_API}/api/bookings?api-version=1.0" | grep -q 'test-hotel-1' && pass "Все бронирования получены" || fail "Бронирования не получены"
+
+# 2. Получение бронирований пользователя
+curl -sSf "${STATISTICS_API}/api/bookings/test-user-3?api-version=1.0" | grep -q 'test-user-3' && pass "Бронирования test-user-3 найдены" || fail "Нет бронирований test-user-3"
+
 echo "✅ Все HTTP-тесты пройдены!"

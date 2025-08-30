@@ -1,0 +1,123 @@
+name: Hotelio.Booking
+services:
+  booking-db:
+    image: postgres:15
+    container_name: booking-db
+    environment:
+      POSTGRES_USER: ${BOOKING_DB_USER}
+      POSTGRES_PASSWORD: ${BOOKING_DB_PASSWORD}
+      POSTGRES_DB: ${BOOKING_DB_NAME}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env
+    volumes:
+      - booking-db-data:/var/lib/postgresql/data
+    networks:
+      - booking-infra-net
+
+  booking-migrator:
+    build:
+      context: ./src/Hotelio.Booking
+      dockerfile: ./Hotelio.Booking.Migrations/Dockerfile
+    container_name: booking-migrator
+    environment:
+      ConnectionStrings__booking_db: Host=booking-db;Database=${BOOKING_DB_NAME};User ID=${BOOKING_DB_USER};Password=${BOOKING_DB_PASSWORD};
+    env_file:
+      - .env
+    depends_on:
+      booking-db:
+        condition: service_healthy
+    networks:
+      - booking-infra-net
+
+  booking-service:
+    build:
+      context: ./src/Hotelio.Booking
+      dockerfile: ./Hotelio.Booking.Service/Dockerfile
+    container_name: booking-service
+    ports:
+      - "9090:8080"
+    env_file:
+      - .env
+    environment:
+      ConnectionStrings__booking_db: Host=booking-db;Database=${BOOKING_DB_NAME};User ID=${BOOKING_DB_USER};Password=${BOOKING_DB_PASSWORD};
+    depends_on:
+      booking-migrator:
+        condition: service_completed_successfully
+    networks:
+      - hotelio-net
+      - booking-infra-net
+
+  booking-statistics-db:
+    image: postgres:15
+    container_name: booking-statistics-db
+    environment:
+      POSTGRES_USER: ${BOOKING_STATISTICS_DB_USER}
+      POSTGRES_PASSWORD: ${BOOKING_STATISTICS_DB_PASSWORD}
+      POSTGRES_DB: ${BOOKING_STATISTICS_DB_NAME}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    ports:
+      - "5434:5432"
+    env_file:
+      - .env
+    volumes:
+      - booking-statistics-db-data:/var/lib/postgresql/data
+    networks:
+      - statistic-infra-net
+
+  booking-statistics-migrator:
+    build:
+      context: ./src/Hotelio.Booking
+      dockerfile: ./Hotelio.Booking.Statistics.Migrations/Dockerfile
+    container_name: booking-statistics-migrator
+    environment:
+      ConnectionStrings__booking_statistics_db: Host=booking-statistics-db;Database=${BOOKING_STATISTICS_DB_NAME};User ID=${BOOKING_STATISTICS_DB_USER};Password=${BOOKING_STATISTICS_DB_PASSWORD};
+    env_file:
+      - .env
+    depends_on:
+      booking-statistics-db:
+        condition: service_healthy
+    networks:
+      - statistic-infra-net
+
+  booking-statistics-service:
+    build:
+      context: ./src/Hotelio.Booking
+      dockerfile: ./Hotelio.Booking.Statistics/Dockerfile
+    container_name: booking-statistics
+    ports:
+      - "9091:8080"
+    env_file:
+      - .env
+    environment:
+      ConnectionStrings__booking_statistics_db: Host=booking-statistics-db;Database=${BOOKING_STATISTICS_DB_NAME};User ID=${BOOKING_STATISTICS_DB_USER};Password=${BOOKING_STATISTICS_DB_PASSWORD};  
+    depends_on:
+      booking-statistics-migrator:
+        condition: service_completed_successfully
+      booking-service:
+        condition: service_started
+    networks:
+      - hotelio-net
+      - statistic-infra-net
+
+volumes:
+  booking-db-data:
+  booking-statistics-db-data:
+
+networks:
+  hotelio-net:
+    external: true
+  booking-infra-net:
+  statistic-infra-net:

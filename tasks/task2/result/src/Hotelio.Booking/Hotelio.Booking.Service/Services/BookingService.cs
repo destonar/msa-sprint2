@@ -1,7 +1,9 @@
 using Booking;
+using Hotelio.Booking.IntegrationEvents;
 using Grpc.Core;
 using Hotelio.Booking.Service.Entities;
 using Hotelio.Booking.Service.Infrastructure;
+using Hotelio.Booking.Service.Infrastructure.EventProducer;
 using Hotelio.Booking.Service.Integrations.Hotels;
 using Hotelio.Booking.Service.Integrations.PromoCodes;
 using Hotelio.Booking.Service.Integrations.Reviews;
@@ -18,6 +20,7 @@ public class BookingService : global::Booking.BookingService.BookingServiceBase
     private readonly IHotelsClient _hotelsClient;
     private readonly IReviewsClient _reviewsClient;
     private readonly IPromoCodesClient _promoCodesClient;
+    private readonly IBookingCreatedEventProducer _eventProducer;
 
     public BookingService(
         ILogger<BookingService> logger,
@@ -25,7 +28,8 @@ public class BookingService : global::Booking.BookingService.BookingServiceBase
         IUsersClient usersClient,
         IHotelsClient hotelsClient,
         IReviewsClient reviewsClient,
-        IPromoCodesClient promoCodesClient)
+        IPromoCodesClient promoCodesClient,
+        IBookingCreatedEventProducer eventProducer)
     {
         _logger = logger;
         _dbContext = dbContext;
@@ -33,6 +37,7 @@ public class BookingService : global::Booking.BookingService.BookingServiceBase
         _hotelsClient = hotelsClient;
         _reviewsClient = reviewsClient;
         _promoCodesClient = promoCodesClient;
+        _eventProducer = eventProducer;
     }
     
     public override async Task<BookingListResponse> ListBookings(BookingListRequest request, ServerCallContext context)
@@ -72,6 +77,16 @@ public class BookingService : global::Booking.BookingService.BookingServiceBase
         var booking = new Entities.Booking(request.UserId, request.HotelId, request.PromoCode, discount, finalPrice, DateTime.UtcNow);
         _dbContext.Bookings.Add(booking);
         await _dbContext.SaveChangesAsync(context.CancellationToken);
+        
+        var @event = new BookingCreated(
+            booking.Id.ToString(),
+            booking.UserId,
+            booking.HotelId,
+            booking.PromoCode,
+            booking.DiscountPercent,
+            booking.Price,
+            booking.CreatedAt);
+        await _eventProducer.Publish(@event, cancellationToken);
         
         _logger.LogInformation("Booking for hotel id={HotelId} is created for user id={UserId}", request.HotelId, request.UserId);
         return booking.ToResponse();
