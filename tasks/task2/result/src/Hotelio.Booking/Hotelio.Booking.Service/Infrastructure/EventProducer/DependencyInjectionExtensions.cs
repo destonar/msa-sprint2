@@ -10,9 +10,31 @@ public static class DependencyInjectionExtensions
         {
             settings.Config.Acks = Acks.All;
         });
+
+        var opts = new EventProducerOptions
+        {
+            IsEnabled = IsEnabled()
+        };
         
+        builder.Services.AddSingleton(opts);
         builder.Services.AddHostedService<TopicInitializer>();
         builder.Services.AddScoped<IBookingCreatedEventProducer, BookingCreatedEventProducer>();
         return builder;
+    }
+
+    private static bool IsEnabled()
+    {
+        var env = Environment.GetEnvironmentVariable("ENABLE_FEATURE_KAFKA_PUBLISH");
+        if (env == null)
+        {
+            return false;
+        }
+
+        if (!bool.TryParse(env, out var isEnabled))
+        {
+            return false;
+        }
+
+        return isEnabled;
     }
 }
