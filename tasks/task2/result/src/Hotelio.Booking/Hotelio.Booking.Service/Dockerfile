@@ -1,7 +1,12 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+RUN echo "deb https://deb.debian.org/debian bookworm main\n\
+deb https://deb.debian.org/debian bookworm-updates main\n\
+deb https://deb.debian.org/debian-security bookworm-security main" > /etc/apt/sources.list \
+    && apt-get update && apt-get install -y curl
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
+EXPOSE 5000
 EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build

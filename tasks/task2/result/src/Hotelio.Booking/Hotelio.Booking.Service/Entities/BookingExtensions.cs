@@ -12,7 +12,7 @@ public static class BookingExtensions
             Id = booking.Id.ToString(),
             UserId = booking.UserId,
             HotelId = booking.HotelId,
-            PromoCode = booking.PromoCode,
+            PromoCode = booking.PromoCode ?? "",
             DiscountPercent = booking.DiscountPercent,
             Price = booking.Price,
             CreatedAt = booking.CreatedAt.ToString("o", CultureInfo.InvariantCulture)
