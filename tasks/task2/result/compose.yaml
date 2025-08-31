@@ -26,6 +26,7 @@ services:
     build:
       context: ./src/Hotelio.Booking
       dockerfile: ./Hotelio.Booking.Migrations/Dockerfile
+    image: hotelio-booking-migrator
     container_name: booking-migrator
     environment:
       ConnectionStrings__booking_db: Host=booking-db;Database=${BOOKING_DB_NAME};User ID=${BOOKING_DB_USER};Password=${BOOKING_DB_PASSWORD};
@@ -41,6 +42,7 @@ services:
     build:
       context: ./src/Hotelio.Booking
       dockerfile: ./Hotelio.Booking.Service/Dockerfile
+    image: hotelio-booking-service
     container_name: booking-service
     ports:
       - "9090:8080"
@@ -82,6 +84,7 @@ services:
     build:
       context: ./src/Hotelio.Booking
       dockerfile: ./Hotelio.Booking.Statistics.Migrations/Dockerfile
+    image: hotelio-booking-statistics-migrator
     container_name: booking-statistics-migrator
     environment:
       ConnectionStrings__booking_statistics_db: Host=booking-statistics-db;Database=${BOOKING_STATISTICS_DB_NAME};User ID=${BOOKING_STATISTICS_DB_USER};Password=${BOOKING_STATISTICS_DB_PASSWORD};
@@ -97,6 +100,7 @@ services:
     build:
       context: ./src/Hotelio.Booking
       dockerfile: ./Hotelio.Booking.Statistics/Dockerfile
+    image: hotelio-booking-statistics
     container_name: booking-statistics
     ports:
       - "9091:8080"
