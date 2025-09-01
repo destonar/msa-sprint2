@@ -1,0 +1,134 @@
+destonar@LAPTOP-IJFJ9B0P:/mnt/d/msa_git/msa-sprint2/tasks/task4/result$ gitlab-ci-local tag
+ WARN  Avoid overriding predefined variables (​https://gitlab.com/gitlab-org/gitlab/-/blob/v17.7.1-ee/doc/ci/variables/predefined_variables.md?plain=1&ref_type=tags#L15-16​) [GITLAB_USER_NAME,GITLAB_USER_EMAIL] as it can cause the pipeline to behave unexpectedly.
+parsing and downloads finished in 71 ms.
+json schema validated in 207 ms
+tag starting shell (tag)
+tag $ TIMESTAMP=$(date +%Y%m%d%H%M%S)
+tag $ TAG="release-${TIMESTAMP}"
+tag $ if [ "$MOCK_TAG" = "true" ]; then # collapsed multi-line command
+tag > Tagged as release-20250901235732
+tag finished in 30 ms
+
+ PASS  tag
+destonar@LAPTOP-IJFJ9B0P:/mnt/d/msa_git/msa-sprint2/tasks/task4/result$ gitlab-ci-local
+ WARN  Avoid overriding predefined variables (​https://gitlab.com/gitlab-org/gitlab/-/blob/v17.7.1-ee/doc/ci/variables/predefined_variables.md?plain=1&ref_type=tags#L15-16​) [GITLAB_USER_NAME,GITLAB_USER_EMAIL] as it can cause the pipeline to behave unexpectedly.
+parsing and downloads finished in 77 ms.
+json schema validated in 245 ms
+build  starting shell (build)
+build  $ docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f ${DOCKER_FILE_PATH} ${DOCKER_CONTEXT_PATH}
+build  > #0 building with "default" instance using docker driver
+build  >
+build  > #1 [internal] load build definition from Dockerfile
+build  > #1 transferring dockerfile: 1.52kB 0.0s done
+build  > #1 DONE 0.0s
+build  >
+build  > #2 [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:9.0
+build  > #2 DONE 0.2s
+build  >
+build  > #3 [internal] load metadata for mcr.microsoft.com/dotnet/sdk:9.0
+build  > #3 DONE 0.2s
+build  >
+build  > #4 [internal] load .dockerignore
+build  > #4 transferring context: 380B 0.0s done
+build  > #4 DONE 0.0s
+build  >
+build  > #5 [base 1/3] FROM mcr.microsoft.com/dotnet/aspnet:9.0@sha256:515c08e27cf8d933af442f0e1b6c92cc728acb71f113ca529f56c79cb597adb5
+build  > #5 resolve mcr.microsoft.com/dotnet/aspnet:9.0@sha256:515c08e27cf8d933af442f0e1b6c92cc728acb71f113ca529f56c79cb597adb5 0.0s done
+build  > #5 DONE 0.0s
+build  >
+build  > #6 [build  1/11] FROM mcr.microsoft.com/dotnet/sdk:9.0@sha256:ae000be75dac94fc40e00f0eee903289e985995cc06dac3937469254ce5b60b6
+build  > #6 resolve mcr.microsoft.com/dotnet/sdk:9.0@sha256:ae000be75dac94fc40e00f0eee903289e985995cc06dac3937469254ce5b60b6 0.0s done
+build  > #6 DONE 0.0s
+build  >
+build  > #7 [internal] load build context
+build  > #7 transferring context: 7.06kB 0.2s done
+build  > #7 DONE 0.2s
+build  >
+build  > #8 [base 2/3] RUN echo "deb https://deb.debian.org/debian bookworm main\ndeb https://deb.debian.org/debian bookworm-updates main\ndeb https://deb.debian.org/debian-security bookworm-security main" > /etc/apt/sources.list     && apt-get update && apt-get install -y curl
+build  > #8 CACHED
+build  >
+build  > #9 [build  6/11] RUN dotnet restore "Hotelio.Booking.IntegrationEvents/Hotelio.Booking.IntegrationEvents.csproj"
+build  > #9 CACHED
+build  >
+build  > #10 [base 3/3] WORKDIR /app
+build  > #10 CACHED
+build  >
+build  > #11 [build  3/11] COPY [Hotelio.ServiceDefaults/Hotelio.ServiceDefaults.csproj, Hotelio.ServiceDefaults/]
+build  > #11 CACHED
+build  >
+build  > #12 [build  2/11] WORKDIR /src
+build  > #12 CACHED
+build  >
+build  > #13 [build  5/11] COPY [Hotelio.Booking.IntegrationEvents/Hotelio.Booking.IntegrationEvents.csproj, Hotelio.Booking.IntegrationEvents/]
+build  > #13 CACHED
+build  >
+build  > #14 [build 11/11] RUN dotnet build "./Hotelio.Booking.Service.csproj" -c Release -o /app/build
+build  > #14 CACHED
+build  >
+build  > #15 [final 1/2] WORKDIR /app
+build  > #15 CACHED
+build  >
+build  > #16 [build 10/11] WORKDIR /src/Hotelio.Booking.Service
+build  > #16 CACHED
+build  >
+build  > #17 [build  4/11] COPY [Hotelio.Booking.Service/Hotelio.Booking.Service.csproj, Hotelio.Booking.Service/]
+build  > #17 CACHED
+build  >
+build  > #18 [publish 1/1] RUN dotnet publish "./Hotelio.Booking.Service.csproj" -c Release -o /app/publish /p:UseAppHost=false
+build  > #18 CACHED
+build  >
+build  > #19 [build  8/11] RUN dotnet restore "Hotelio.Booking.Service/Hotelio.Booking.Service.csproj"
+build  > #19 CACHED
+build  >
+build  > #20 [build  9/11] COPY . .
+build  > #20 CACHED
+build  >
+build  > #21 [build  7/11] RUN dotnet restore "Hotelio.ServiceDefaults/Hotelio.ServiceDefaults.csproj"
+build  > #21 CACHED
+build  >
+build  > #22 [final 2/2] COPY --from=publish /app/publish .
+build  > #22 CACHED
+build  >
+build  > #23 exporting to image
+build  > #23 exporting layers 0.0s done
+build  > #23 exporting manifest sha256:db4a875445329f73906ef3efe6feecb14d4ff4a55c8af5b88a42b9980eab0d1f done
+build  > #23 exporting config sha256:7c6c98bbf4a79b0c367caadd3bba3c03402c8b7a229c52eaba9aa753d178b784 done
+build  > #23 exporting attestation manifest sha256:2240e73c522f31c59315566e804f4bcf0bd888ab90147b90e17950ab99d8eb00 0.0s done
+build  > #23 exporting manifest list sha256:ea718eeb4748d0f6479f6c8c489029e6ea8b5cc9ec1524badb4b08e77b1e1c3d 0.0s done
+build  > #23 naming to docker.io/library/hotelio-booking-service:latest done
+build  > #23 unpacking to docker.io/library/hotelio-booking-service:latest 0.0s done
+build  > #23 DONE 0.2s
+build  finished in 1.92 s
+test   starting shell (test)
+test   $ docker run --rm -d -p 5000:5000 --name booking-service-test ${IMAGE_NAME}:${IMAGE_TAG}
+test   > a212e369c961aa192327ca0e5e436f0b4905d40b41aa139808fd7d828ee265a1
+test   $ sleep 2
+test   $ RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/ping  || echo "000") # collapsed multi-line command
+test   > Service is working
+test   $ docker stop booking-service-test
+test   > booking-service-test
+test   finished in 3.64 s
+deploy starting shell (deploy)
+deploy $ minikube image load ${IMAGE_NAME}:${IMAGE_TAG}
+deploy > still running...
+deploy $ helm upgrade ${RELEASE_NAME} ${CHART_PATH} --install --set image.name=${IMAGE_NAME} --set image.tag=${IMAGE_TAG}
+deploy > Release "booking-service" has been upgraded. Happy Helming!
+deploy > NAME: booking-service
+deploy > LAST DEPLOYED: Tue Sep  2 00:19:35 2025
+deploy > NAMESPACE: default
+deploy > STATUS: deployed
+deploy > REVISION: 3
+deploy > TEST SUITE: None
+deploy finished in 20 s
+tag    starting shell (tag)
+tag    $ TIMESTAMP=$(date +%Y%m%d%H%M%S)
+tag    $ TAG="release-${TIMESTAMP}"
+tag    $ if [ "$MOCK_TAG" = "true" ]; then # collapsed multi-line command
+tag    > Tagged as release-20250902001935
+tag    finished in 29 ms
+
+ PASS  build
+ PASS  test
+ PASS  deploy
+ PASS  tag
+pipeline finished in 26 s

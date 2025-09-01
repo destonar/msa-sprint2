@@ -6,16 +6,21 @@ public static class DependencyInjectionExtensions
 {
     public static WebApplicationBuilder AddBookingEventProducer(this WebApplicationBuilder builder)
     {
-        builder.AddKafkaProducer<string, string>("kafka", settings =>
-        {
-            settings.Config.Acks = Acks.All;
-        });
-
         var opts = new EventProducerOptions
         {
             IsEnabled = IsEnabled()
         };
+
+        if (!opts.IsEnabled)
+        {
+            builder.Services.AddSingleton<IBookingCreatedEventProducer, NoopEventProducer>();
+            return builder;
+        }
         
+        builder.AddKafkaProducer<string, string>("kafka", settings =>
+        {
+            settings.Config.Acks = Acks.All;
+        });
         builder.Services.AddSingleton(opts);
         builder.Services.AddHostedService<TopicInitializer>();
         builder.Services.AddScoped<IBookingCreatedEventProducer, BookingCreatedEventProducer>();
