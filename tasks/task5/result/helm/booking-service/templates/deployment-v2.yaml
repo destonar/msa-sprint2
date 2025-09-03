@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}-v1
+  name: {{ .Values.app.name }}-v2
   labels:
     app: {{ .Values.app.name }}
-    version: v1
+    version: v2
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ .Values.app.name }}
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: {{ .Values.app.name }}
-        version: v1
+        version: v2
     spec:
       containers:
         - name: booking-service
@@ -42,7 +42,7 @@ spec:
               value: {{ .Values.kafka.host }}:{{ .Values.kafka.port }}
 
             - name: ENABLE_FEATURE_KAFKA_PUBLISH
-              value: "false"
+              value: "true"
               
             - name: Integrations__HotelsUrl
               value: {{ .Values.integrations.hotelsUrl }}

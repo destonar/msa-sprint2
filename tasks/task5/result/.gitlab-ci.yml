@@ -40,8 +40,7 @@ deploy:
   needs: [build, test]
   script:
     #- minikube image load ${IMAGE_NAME}:${IMAGE_TAG}
-    - helm upgrade ${RELEASE_NAME}-v1 ${CHART_PATH} -f ./helm/booking-service/values.yaml --install
-    - helm upgrade ${RELEASE_NAME}-v2 ${CHART_PATH} -f ./helm/booking-service/values-v2.yaml --install
+    - helm upgrade ${RELEASE_NAME} ${CHART_PATH} -f ./helm/booking-service/values.yaml --install
 tag:
   stage: tag
   needs: [build, test, deploy]
