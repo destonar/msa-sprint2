@@ -2,6 +2,7 @@ using Hotelio.Booking.Service.Infrastructure;
 using Hotelio.Booking.Service.Infrastructure.EventProducer;
 using Hotelio.Booking.Service.Integrations;
 using Hotelio.Booking.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +29,7 @@ builder.Services.AddGrpc();
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
-app.MapGet("/ping", () => "pong");
+app.MapGet("/ping", ([FromServices]EventProducerOptions options) => options.IsEnabled ? "pong-v2" : "pong");
 app.MapGrpcService<BookingService>();
 
 app.Run();

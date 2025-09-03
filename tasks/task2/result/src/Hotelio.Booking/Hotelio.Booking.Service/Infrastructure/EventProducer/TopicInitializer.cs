@@ -6,14 +6,25 @@ namespace Hotelio.Booking.Service.Infrastructure.EventProducer;
 public class TopicInitializer : BackgroundService
 {
     private readonly IConfiguration _configuration;
+    private readonly EventProducerOptions _options;
+    private readonly ILogger<TopicInitializer> _logger;
 
-    public TopicInitializer(IConfiguration configuration)
+    public TopicInitializer(IConfiguration configuration, EventProducerOptions options, ILogger<TopicInitializer> logger)
     {
         _configuration = configuration;
+        _options = options;
+        _logger = logger;
     }
     
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        if (!_options.IsEnabled)
+        {
+            _logger.LogInformation("Kafka publication is disabled via feature flag");
+        }
+        
+        return;
+        
         var cs = _configuration.GetConnectionString("kafka");
         if (cs == null)
         {

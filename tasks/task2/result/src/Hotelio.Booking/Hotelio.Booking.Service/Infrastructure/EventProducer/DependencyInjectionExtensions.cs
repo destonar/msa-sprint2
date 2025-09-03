@@ -10,7 +10,9 @@ public static class DependencyInjectionExtensions
         {
             IsEnabled = IsEnabled()
         };
-
+        builder.Services.AddSingleton(opts);
+        builder.Services.AddHostedService<TopicInitializer>();
+        
         if (!opts.IsEnabled)
         {
             builder.Services.AddSingleton<IBookingCreatedEventProducer, NoopEventProducer>();
@@ -21,8 +23,6 @@ public static class DependencyInjectionExtensions
         {
             settings.Config.Acks = Acks.All;
         });
-        builder.Services.AddSingleton(opts);
-        builder.Services.AddHostedService<TopicInitializer>();
         builder.Services.AddScoped<IBookingCreatedEventProducer, BookingCreatedEventProducer>();
         return builder;
     }
