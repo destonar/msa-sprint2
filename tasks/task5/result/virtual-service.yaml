@@ -33,6 +33,13 @@ spec:
             port:
               number: 5000
           weight: 10
+    # по идее недостижимо?
+    - route:
+        - destination:
+            host: booking-service
+            subset: v2
+            port:
+              number: 5000
       retries:
         attempts: 3
         perTryTimeout: 2s

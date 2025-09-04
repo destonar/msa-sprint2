@@ -1,0 +1,3 @@
+/mnt/d/msa_git/msa-sprint2/tasks/task5$ ./check-feature-flag.sh
+▶️ Проверка Feature Flag (X-KafkaPublish-Enabled: true)...
+pong-v2
