@@ -1,0 +1,12 @@
+CONTAINER ID   IMAGE                                       COMMAND                  CREATED         STATUS                 PORTS                                         NAMES
+dbf3f63a93c8   result-apollo-gateway                       "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes           0.0.0.0:4000->4000/tcp, [::]:4000->4000/tcp   result-apollo-gateway-1
+f2c8d19434bd   result-hotel-subgraph                       "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes           0.0.0.0:4002->4002/tcp, [::]:4002->4002/tcp   hotel-subgraph
+7e9143feeaa3   result-booking-subgraph                     "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes           0.0.0.0:4001->4001/tcp, [::]:4001->4001/tcp   booking-subgraph
+4e5c23b488fb   hoteliobooking-booking-statistics-service   "dotnet Hotelio.Book…"   7 hours ago     Up 7 hours             0.0.0.0:9091->8080/tcp, [::]:9091->8080/tcp   booking-statistics
+620c64f33b4b   hoteliobooking-booking-service              "dotnet Hotelio.Book…"   7 hours ago     Up 7 hours             0.0.0.0:9090->8080/tcp, [::]:9090->8080/tcp   booking-service
+dbfba3289aab   postgres:15                                 "docker-entrypoint.s…"   7 hours ago     Up 7 hours (healthy)   0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp   booking-db
+0e8057669f7a   postgres:15                                 "docker-entrypoint.s…"   7 hours ago     Up 7 hours (healthy)   0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp   booking-statistics-db
+90a112ef491b   postgres:15                                 "docker-entrypoint.s…"   7 hours ago     Up 7 hours             0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   hotelio-db
+da2981ddf06c   confluentinc/cp-zookeeper:7.2.1             "/etc/confluent/dock…"   7 hours ago     Up 7 hours             0.0.0.0:2181->2181/tcp, [::]:2181->2181/tcp   task2-zookeeper-1
+2a7b9314748c   confluentinc/cp-kafka:7.2.1                 "/etc/confluent/dock…"   7 hours ago     Up 7 hours             0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp   task2-kafka-1
+ec68983d0ea8   task2-monolith                              "java -jar app.jar"      7 hours ago     Up 7 hours             0.0.0.0:8084->8080/tcp, [::]:8084->8080/tcp   hotelio-monolith

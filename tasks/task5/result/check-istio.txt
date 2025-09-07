@@ -1,0 +1,13 @@
+/mnt/d/msa_git/msa-sprint2/tasks/task5$ ./check-istio.sh
+▶️ Проверка установки Istio...
+NAME                                    READY   STATUS    RESTARTS       AGE
+grafana-cdb9db549-g8wz2                 1/1     Running   1 (120m ago)   25h
+istio-egressgateway-559bd55945-89x2n    1/1     Running   2 (120m ago)   2d1h
+istio-ingressgateway-74df47f5f9-rv6l2   1/1     Running   2 (120m ago)   2d1h
+istiod-85798b5866-lsgqb                 1/1     Running   2 (120m ago)   2d1h
+jaeger-84b9c75d5f-xp7tm                 1/1     Running   1 (120m ago)   25h
+kiali-56f54f58f9-j8xbc                  1/1     Running   1 (120m ago)   25h
+loki-0                                  2/2     Running   2 (120m ago)   25h
+prometheus-7bf56b6bc-kn6rd              2/2     Running   2 (120m ago)   25h
+▶️ Проверка Istio инъекции в default namespace...
+"enabled"

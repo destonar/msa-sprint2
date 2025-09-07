@@ -1,0 +1,81 @@
+@startuml Conceptual Model
+
+package "Bookings" {
+    object "User" as User
+    enum "UserStatus" as UserStatus
+    {
+        Regular
+        Vip
+    }
+
+    object "Hotel" as Hotel
+    object "HotelRating" as HotelRating
+    enum "HotelState" as HotelStatus
+    {
+        Operational
+        Closed
+    }
+ 
+    object "Booking" as Booking
+
+    User "1"-->"0..*" Booking : has
+    User --> UserStatus : has
+
+    Booking "1" -->"1" Hotel : for
+
+    Hotel --> HotelStatus : is in
+    Hotel --> HotelRating : has
+}
+
+package "Hotels" {
+    object "Hotel" as Hotels.Hotel
+    object "HotelRating" as Hotels.HotelRating
+    enum "HotelState" as Hotels.HotelStatus
+    {
+        Operational
+        Closed
+        IsFullyBooked
+    }
+
+    Hotels.Hotel --> Hotels.HotelStatus : is in
+    Hotels.Hotel --> Hotels.HotelRating : has
+}
+
+package "Reviews" {
+    object "Hotel" as Reviews.Hotel
+    object "Review" as Review
+    object "Reviewer" as Reviewer
+
+    Review "1" --> "1" Reviews.Hotel : for
+    Reviewer "1" --> "0..*" Review : has
+
+}
+
+package "Users" {
+    object "User" as Users.User
+    enum "UserStatus" as UserStatus
+    {
+        Regular
+        Vip
+    }
+
+    Users.User --> Users.UserStatus : has
+}
+
+package "Promocodes" {
+    object "Promocode" as Promocode
+    object "User" as Promocodes.User
+
+    Promocodes.User "1" --> "0..*" Promocode: has
+}
+
+Promocode --> Bookings.Booking : is applied for
+
+Bookings.Hotel --> Hotels.Hotel : is a
+Reviews.Hotel --> Hotels.Hotel : is a
+
+Bookings.User --> Users.User : is a
+Reviewer --> Users.User : is a
+Promocodes.User --> Users.User : is a
+
+@enduml

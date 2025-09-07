@@ -1,0 +1,59 @@
+stages:
+  - build
+  - test
+  - deploy
+  - tag
+
+variables:
+  IMAGE_TAG: latest
+  IMAGE_NAME: hotelio-booking-service
+  DOCKER_FILE_PATH: ../../task2/result/src/Hotelio.Booking/Hotelio.Booking.Service/Dockerfile
+  DOCKER_CONTEXT_PATH: ../../task2/result/src/Hotelio.Booking
+  CHART_PATH: "helm/booking-service/"
+  RELEASE_NAME: "booking-service"
+
+  MOCK_TAG: "true"
+build:
+  stage: build
+  script: 
+    - docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f ${DOCKER_FILE_PATH} ${DOCKER_CONTEXT_PATH}
+
+
+test:
+  stage: test
+  needs: [build]
+  script:
+    - docker run --rm -d -p 5000:5000 --name booking-service-test ${IMAGE_NAME}:${IMAGE_TAG}
+    - sleep 2
+    - |
+      RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/ping  || echo "000")
+      if [ "$RESPONSE" != "200" ]; then
+        echo "Ping did not return 200 OK"
+        docker stop booking-service-test
+        exit 1
+      fi
+      echo "Service is working"
+    - docker stop booking-service-test
+
+deploy:
+  stage: deploy
+  needs: [build, test]
+  script:
+    - minikube image load ${IMAGE_NAME}:${IMAGE_TAG}
+    - helm upgrade ${RELEASE_NAME} ${CHART_PATH} --install --set image.name=${IMAGE_NAME} --set image.tag=${IMAGE_TAG}
+
+tag:
+  stage: tag
+  needs: [build, test, deploy]
+  script:
+    - TIMESTAMP=$(date +%Y%m%d%H%M%S)
+    - TAG="release-${TIMESTAMP}"
+    - |
+      if [ "$MOCK_TAG" = "true" ]; then
+        echo "Tagged as $TAG"
+      else
+        git config --global user.name "${GITLAB_USER_NAME}"
+        git config --global user.email "${GITLAB_USER_EMAIL}"
+        git tag $TAG
+        git push origin $TAG
+      fi

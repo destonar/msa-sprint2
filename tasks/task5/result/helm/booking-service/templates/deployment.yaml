@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-v1
+  labels:
+    app: {{ .Values.app.name }}
+    version: v1
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        version: v1
+    spec:
+      containers:
+        - name: booking-service
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.ports.http.targetPort }}
+            - name: grpc
+              containerPort: {{ .Values.service.ports.grpc.targetPort }}
+          env:
+            {{- if .Values.env }}
+            {{- toYaml .Values.env | nindent 12 }}
+            {{- end }}           
+            
+            - name: ConnectionStrings__booking_db
+              value: >-
+                Host={{ .Values.postgres.host }};
+                Port={{ .Values.postgres.port }};
+                Database={{ .Values.postgres.database }};
+                Username={{ .Values.postgres.username }};
+                Password={{ .Values.postgres.password }};
+            - name: ConnectionStrings__kafka
+              value: {{ .Values.kafka.host }}:{{ .Values.kafka.port }}
+
+            - name: ENABLE_FEATURE_KAFKA_PUBLISH
+              value: "false"
+              
+            - name: Integrations__HotelsUrl
+              value: {{ .Values.integrations.hotelsUrl }}
+            - name: Integrations__ReviewsUrl
+              value: {{ .Values.integrations.reviewsUrl }}
+            - name: Integrations__PromoCodesUrl
+              value: {{ .Values.integrations.promoCodesUrl }}
+            - name: Integrations__UsersUrl
+              value: {{ .Values.integrations.usersUrl }}
+
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

@@ -1,0 +1,59 @@
+PS D:\msa_git\msa-sprint2\tasks\task4\result> docker image ls
+REPOSITORY                                   TAG                                                                           IMAGE ID       CREATED         SIZE
+hotelio-booking-migrator                     latest                                                                        5289b2615ad1   21 hours ago    419MB
+hoteliobooking-booking-migrator              latest                                                                        b29249426c80   21 hours ago    419MB
+hoteliobooking-booking-statistics-migrator   latest                                                                        019a9898cd4d   21 hours ago    417MB
+hotelio-booking-statistics-migrator          latest                                                                        07e54e7521aa   21 hours ago    417MB
+hotelio-booking-service                      latest                                                                        0673192ab822   21 hours ago    489MB
+hoteliobooking-booking-service               latest                                                                        dbacaa76a805   21 hours ago    489MB
+result-apollo-gateway                        latest                                                                        83832ee8b069   24 hours ago    1.76GB
+result-hotel-subgraph                        latest                                                                        3cd449bf19ab   24 hours ago    1.71GB
+result-booking-subgraph                      latest                                                                        30c1a9e6222f   24 hours ago    1.71GB
+task3-hotel-subgraph                         latest                                                                        5c87710709ba   25 hours ago    1.65GB
+task3-booking-subgraph                       latest                                                                        1bbe6b16bc39   25 hours ago    1.65GB
+task3-apollo-gateway                         latest                                                                        d8505540ae61   25 hours ago    1.71GB
+hotelio-tester                               latest                                                                        468c7cd1df5e   44 hours ago    141MB
+hotelio-booking-statistics                   latest                                                                        69d80594008c   45 hours ago    443MB
+hoteliobooking-booking-statistics-service    latest                                                                        a9e337dbe33a   45 hours ago    443MB
+hotelio-booking-statistics-migration         latest                                                                        01a485467a72   46 hours ago    417MB
+hotelio-booking-service-migration            latest                                                                        a21216eaf245   46 hours ago    419MB
+hoteliobookingtask4-monolith                 latest                                                                        9b3c40cc1a8d   8 days ago      764MB
+task1-monolith                               latest                                                                        b2b2bca4c01d   8 days ago      764MB
+hoteliobooking-monolith                      latest                                                                        91939766ad60   8 days ago      764MB
+task2-monolith                               latest                                                                        8329e8c3551b   8 days ago      764MB
+postgres                                     15                                                                            bc51cf4f1fe0   2 weeks ago     629MB
+mcr.microsoft.com/dotnet/sdk                 9.0                                                                           ae000be75dac   2 weeks ago     1.2GB
+mcr.microsoft.com/dotnet/aspnet              9.0                                                                           515c08e27cf8   2 weeks ago     329MB
+kong                                         latest                                                                        7bf228559196   2 months ago    528MB
+gcr.io/k8s-minikube/kicbase                  v0.0.47                                                                       8311be96a0a8   3 months ago    1.86GB
+gcr.io/k8s-minikube/kicbase                  <none>                                                                        6ed579c9292b   3 months ago    1.86GB
+docker/desktop-kubernetes                    kubernetes-v1.32.2-cni-v1.6.0-critools-v1.31.1-cri-dockerd-v0.3.16-1-debian   fdd1722efdcc   6 months ago    596MB
+registry.k8s.io/kube-apiserver               v1.32.2                                                                       c47449f3e751   6 months ago    129MB
+registry.k8s.io/kube-scheduler               v1.32.2                                                                       45710d74cfd5   6 months ago    93.5MB
+registry.k8s.io/kube-controller-manager      v1.32.2                                                                       399aa50f4d13   6 months ago    119MB
+registry.k8s.io/kube-proxy                   v1.32.2                                                                       83c025f0faa6   6 months ago    129MB
+mcr.microsoft.com/dotnet/sdk                 8.0                                                                           b27b1354af00   7 months ago    1.18GB
+mcr.microsoft.com/dotnet/aspnet              8.0                                                                           587c1dd115e4   7 months ago    320MB
+nginx                                        latest                                                                        0a399eb16751   9 months ago    278MB
+postgres                                     latest                                                                        87ec5e0a167d   9 months ago    614MB
+docker/desktop-kubernetes                    kubernetes-v1.30.5-cni-v1.4.0-critools-v1.29.0-cri-dockerd-v0.3.11-1-debian   7a7b02256c8d   10 months ago   625MB
+registry.k8s.io/etcd                         3.5.16-0                                                                      c6a9d11cc5c0   11 months ago   211MB
+registry.k8s.io/kube-apiserver               v1.30.5                                                                       7746ea55ad74   11 months ago   153MB
+registry.k8s.io/kube-scheduler               v1.30.5                                                                       62c91756a3c9   11 months ago   84.6MB
+registry.k8s.io/kube-controller-manager      v1.30.5                                                                       bbd15d267294   11 months ago   146MB
+registry.k8s.io/kube-proxy                   v1.30.5                                                                       fa20f91153b9   11 months ago   118MB
+registry.k8s.io/coredns/coredns              v1.11.3                                                                       9caabbf6238b   13 months ago   85.1MB
+registry.k8s.io/pause                        3.10                                                                          ee6521f290b2   15 months ago   1.06MB
+registry.k8s.io/etcd                         3.5.12-0                                                                      44a8e24dcbba   19 months ago   211MB
+docker/desktop-vpnkit-controller             dc331cb22850be0cdd97c84a9cfecaf44a1afb6e                                      7ecf567ea070   2 years ago     47MB
+registry.k8s.io/pause                        3.9                                                                           7031c1b28338   2 years ago     1.07MB
+confluentinc/cp-kafka                        7.2.1                                                                         7494848da233   3 years ago     1.23GB
+confluentinc/cp-zookeeper                    7.2.1                                                                         a09fad082e13   3 years ago     1.23GB
+postgres                                     9.6                                                                           caddd35b05cd   3 years ago     294MB
+docker/desktop-storage-provisioner           v2.0                                                                          115d77efe6e2   4 years ago     59.2MB
+registry.k8s.io/etcd                         3.5.15-0                                                                      a6dc63e6e8cf   55 years ago    56.8MB
+
+PS D:\msa_git\msa-sprint2\tasks\task4\result> kubectl get services
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+booking-service   ClusterIP   10.102.216.29   <none>        5000/TCP,8080/TCP   19h
+kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP             19h

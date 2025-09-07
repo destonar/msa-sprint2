@@ -1,0 +1,13 @@
+# Common Helm ignores
+.DS_Store
+# VCS
+.git/
+.hg/
+.svn/
+# IDEs
+.idea/
+.vscode/
+# OS
+Thumbs.db
+# Node / deps
+node_modules/

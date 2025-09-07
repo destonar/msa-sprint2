@@ -1,0 +1,9 @@
+CONTAINER ID   IMAGE                                       COMMAND                  CREATED          STATUS                    PORTS                                         NAMES
+b89c017a8a29   hoteliobooking-booking-statistics-service   "dotnet Hotelio.Book…"   16 seconds ago   Up 5 seconds              0.0.0.0:9091->8080/tcp, [::]:9091->8080/tcp   booking-statistics
+7cfdcf7483d8   hoteliobooking-booking-service              "dotnet Hotelio.Book…"   17 seconds ago   Up 7 seconds              0.0.0.0:9090->8080/tcp, [::]:9090->8080/tcp   booking-service
+c626999a3d58   postgres:15                                 "docker-entrypoint.s…"   17 seconds ago   Up 16 seconds (healthy)   0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp   booking-statistics-db
+2639f049a4ed   postgres:15                                 "docker-entrypoint.s…"   17 seconds ago   Up 16 seconds (healthy)   0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp   booking-db
+98e1448da0ed   postgres:15                                 "docker-entrypoint.s…"   41 minutes ago   Up 41 minutes             0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   hotelio-db
+accbac82ef4e   confluentinc/cp-kafka:7.2.1                 "/etc/confluent/dock…"   41 minutes ago   Up 41 minutes             0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp   task2-kafka-1
+11da0d756d10   confluentinc/cp-zookeeper:7.2.1             "/etc/confluent/dock…"   41 minutes ago   Up 41 minutes             0.0.0.0:2181->2181/tcp, [::]:2181->2181/tcp   task2-zookeeper-1
+428daad2caf6   task2-monolith                              "java -jar app.jar"      41 minutes ago   Up 41 minutes             0.0.0.0:8084->8080/tcp, [::]:8084->8080/tcp   hotelio-monolith
